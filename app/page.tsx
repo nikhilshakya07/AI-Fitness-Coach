@@ -1,65 +1,74 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Sparkles, Dumbbell, UtensilsCrossed, Brain } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="container mx-auto px-4 py-16">
+      {/* Hero Section */}
+      <div className="flex flex-col items-center text-center space-y-6 mb-16">
+        <div className="relative inline-block">
+          <Sparkles className="h-12 w-12 text-primary mb-4" />
+          <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-50" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+          Your AI-Powered
+          <br />
+          <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Fitness Coach
+          </span>
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-2xl">
+          Get personalized workout and diet plans tailored to your goals, fitness level, and preferences. 
+          Powered by advanced AI technology.
+        </p>
+        <Link href="/generate">
+          <Button size="lg" className="mt-4">
+            Get Started
+            <Sparkles className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
+
+      {/* Features Grid */}
+      <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <Card className="border-2 hover:border-primary/50 transition-colors">
+          <CardHeader>
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+              <Dumbbell className="h-5 w-5 text-primary" />
+            </div>
+            <CardTitle>Personalized Workouts</CardTitle>
+            <CardDescription>
+              AI-generated workout plans based on your fitness level, goals, and available equipment.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+
+        <Card className="border-2 hover:border-primary/50 transition-colors">
+          <CardHeader>
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+              <UtensilsCrossed className="h-5 w-5 text-primary" />
+            </div>
+            <CardTitle>Smart Diet Plans</CardTitle>
+            <CardDescription>
+              Customized meal plans that match your dietary preferences and nutritional goals.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+
+        <Card className="border-2 hover:border-primary/50 transition-colors">
+          <CardHeader>
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+              <Brain className="h-5 w-5 text-primary" />
+            </div>
+            <CardTitle>AI-Powered Insights</CardTitle>
+            <CardDescription>
+              Get expert tips, motivation, and lifestyle advice powered by advanced AI.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
     </div>
   );
 }
