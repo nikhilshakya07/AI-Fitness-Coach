@@ -25,6 +25,7 @@ import {
 import { Sparkles, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const FITNESS_GOALS = [
   { value: "weight_loss", label: "Weight Loss" },
@@ -64,6 +65,7 @@ const GENDERS = [
 
 export function UserInputForm() {
   const router = useRouter();
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -84,12 +86,33 @@ export function UserInputForm() {
   const onSubmit = async (data: UserProfileFormData) => {
     setIsSubmitting(true);
     try {
-      // Store form data in sessionStorage for now (will be used in Phase 5)
-      sessionStorage.setItem("userProfile", JSON.stringify(data));
-      // Navigate to dashboard (will be created in Phase 5)
+      const response = await fetch("/api/generate-plan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to generate plan");
+      }
+
+      const fitnessPlan = await response.json();
+      
+      // Store plan in sessionStorage
+      sessionStorage.setItem("fitnessPlan", JSON.stringify(fitnessPlan));
+      
+      // Navigate to dashboard
       router.push("/dashboard");
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (error: any) {
+      console.error("Error generating plan:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to generate fitness plan. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

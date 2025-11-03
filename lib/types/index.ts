@@ -82,7 +82,23 @@ export interface Meal {
  * Diet Plan
  */
 export interface DietPlan {
-  dailyMeals: {
+  // New format: meal options
+  mealOptions?: {
+    breakfast: Meal[];
+    lunch: Meal[];
+    dinner: Meal[];
+    snacks: Meal[];
+  };
+  dailyTargets?: {
+    totalCalories: number;
+    totalMacros?: {
+      protein: number;
+      carbs: number;
+      fats: number;
+    };
+  };
+  // Old format: daily meals (for backward compatibility)
+  dailyMeals?: {
     day: string;
     meals: {
       breakfast: Meal;
@@ -105,9 +121,9 @@ export interface DietPlan {
  * AI Tips
  */
 export interface AITips {
-  lifestyleTips: string[];
-  postureTips: string[];
-  motivationalQuotes: string[];
+  lifestyleTips?: string[];
+  postureTips?: string[];
+  motivationalQuotes?: string[];
 }
 
 /**

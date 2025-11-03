@@ -1,7 +1,10 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sparkles, Dumbbell, UtensilsCrossed, Brain } from "lucide-react";
 import Link from "next/link";
+import { MotivationQuote } from "@/components/features/MotivationQuote";
 
 export default function Home() {
   return (
@@ -29,6 +32,11 @@ export default function Home() {
             <Sparkles className="ml-2 h-4 w-4" />
           </Button>
         </Link>
+      </div>
+
+      {/* Daily Motivation Quote */}
+      <div className="mb-16 max-w-2xl mx-auto">
+        <MotivationQuote />
       </div>
 
       {/* Features Grid */}
